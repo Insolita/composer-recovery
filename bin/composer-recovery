@@ -9,7 +9,7 @@ use Insolita\ComposerRecovery\Runner;
  *    cd /var/www/myproject && composer-recovery
  * Supported options:
  *  - p : path to project directory (by default - active directory where script was called)
- *  - o : path to directory where recovered_composer.json will be written (by default - same as project directory)
+ *  - o : path to directory where recovered_dependecies.json will be written (by default - same as project directory)
  *  - f : custom file name - (by default - recovered_dependecies.json)
  * Examples with options:
  *   composer-recovery -p /var/www/myproject/ -o /some/place/for/result/ -f mycomposer.json

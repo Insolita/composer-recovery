@@ -15,7 +15,7 @@ Helper for recovery composer dependency list (if you lost composer.json) from co
  **NOTE2**: If your project under vcs control, you don't need this package. You can easy restore composer.json from
   previous commit or another branch
 
-####Installation:
+#### Installation:
  
 `composer global require insolita/composer-recovery`
 
@@ -25,19 +25,19 @@ Ensure that your ~/.composer/vendor/bin directory declared in $PATH
 
 if not - you should add it in ~/.bashrc or ~/.profile
 
-####Basic Usage:
+#### Basic Usage:
 
 `cd /var/www/myproject && composer-recovery`
 
-#####Supported options:
+##### Supported options:
 
    -p : path to project directory (by default - active directory where script was called)
    
-   -o : path to directory where recovered_composer.json will be written (by default - same as project directory)
+   -o : path to directory where recovered_dependecies.json will be written (by default - same as project directory)
    
    -f : custom file name - (by default - recovered_dependecies.json)
    
-#####Examples with options:
+##### Examples with options:
 
 `composer-recovery -p /var/www/myproject/ -o /some/place/for/result/ -f mycomposer.json`
 
