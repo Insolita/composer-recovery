@@ -3,3 +3,5 @@ vendor
 composer.lock
 .php_cs.cache
 .phpunit.result.cache
+!tests/stub/app1/composer.lock
+!tests/stub/app2/vendor/
