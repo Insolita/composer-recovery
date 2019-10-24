@@ -9,6 +9,7 @@
             "email": "webmaster100500@ya.ru"
         }
     ] ,
+    "keywords": ["composer"],
     "minimum-stability": "stable" ,
     "require":           {
         "php":            ">=7.1" ,
