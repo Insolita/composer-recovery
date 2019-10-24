@@ -1,0 +1,40 @@
+#!/usr/bin/env php
+<?php
+use Insolita\ComposerRecovery\Runner;
+/**
+ * Recover composer dependencies (if you lost composer.json) by composer.lock or vendor/composer/installed.json
+ * Installation:
+ *   composer global require insolita/composer-recovery
+ * Usage:
+ *    cd /var/www/myproject && composer-recovery
+ * Supported options:
+ *  - p : path to project directory (by default - active directory where script was called)
+ *  - o : path to directory where recovered_composer.json will be written (by default - same as project directory)
+ *  - f : custom file name - (by default - recovered_dependecies.json)
+ * Examples with options:
+ *   composer-recovery -p /var/www/myproject/ -o /some/place/for/result/ -f mycomposer.json
+ *   composer-recovery -p . -o ../output/
+ **/
+$ds = DIRECTORY_SEPARATOR;
+if (file_exists(dirname(__DIR__) . $ds.'vendor'.$ds.'autoload.php')) {
+    require dirname(__DIR__) . $ds.'vendor'.$ds.'autoload.php';
+} else {
+    require dirname(__DIR__, 3) . $ds.'autoload.php';
+}
+
+$opts = getopt("p:o:f:");
+$projectPath = realpath($opts['p'] ?? getcwd());
+if(!$projectPath){
+    echo 'Project path not found '.PHP_EOL;
+    exit(1);
+}
+$outputPath = realpath($opts['o'] ?? $projectPath);
+if(!$outputPath){
+    echo 'Invalid output path'.PHP_EOL;
+    exit(1);
+}
+$fileName = $opts['f'] ?? 'recovered_dependecies.json';
+$outputPath = rtrim($outputPath, $ds).$ds.$fileName;
+
+$exitCode = (new Runner($projectPath, $outputPath))->run();
+exit($exitCode);

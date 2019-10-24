@@ -1,0 +1,19 @@
+{
+    "require": {
+        "abraham/twitteroauth": "dev-master#28697071",
+        "fideloper/proxy": "4.2.0",
+        "guzzlehttp/guzzle": "6.3.3",
+        "laravel-frontend-presets/bulma": "v2.0.5",
+        "laravel/telescope": "v2.0.6",
+        "laravel/tinker": "v1.0.10",
+        "maxakawizard/json-collection-parser": "1.5.0"
+    },
+    "require-dev": {
+        "barryvdh/laravel-ide-helper": "v2.6.2",
+        "beyondcode/laravel-dump-server": "1.3.0",
+        "fzaninotto/faker": "v1.8.0",
+        "mockery/mockery": "1.2.3",
+        "nunomaduro/collision": "v3.0.1",
+        "phpunit/phpunit": "7.5.15"
+    }
+}
