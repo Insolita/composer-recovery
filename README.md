@@ -2,6 +2,8 @@
 Helper for recovery composer dependency list (if you lost composer.json) from composer.lock or vendor/composer/installed
 .json
 
+[![Build Status](https://travis-ci.org/Insolita/composer-recovery.svg?branch=master)](https://travis-ci.org/Insolita/composer-recovery)
+
 **NOTE**: It is not file-recovery tool, and it can`t recover composer.json data same as it was in original. It just
  extracts package list and concrete versions (and also hash for dev-master dependecies) from composer.lock, or, if it
   absent too, from vendor/composer/installed.json 
