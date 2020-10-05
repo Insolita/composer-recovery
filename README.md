@@ -17,7 +17,7 @@ Helper for recovery composer dependency list (if you lost composer.json) from co
 
 #### Installation:
  
-`composer global require insolita/composer-recovery`
+`composer global require insolita/composer_recovery`
 
 Ensure that your ~/.composer/vendor/bin directory declared in $PATH
 
