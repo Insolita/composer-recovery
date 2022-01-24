@@ -82,9 +82,11 @@ final class Runner
         $deps = array_reduce($packages, [$this, 'collectRequirements'], []);
         $result['require'] = $this->buildMap($packages, $deps);
 
-        if($packagesDev) {
-            $depsDev = array_reduce($packagesDev, [$this, 'collectRequirements'], []);
-            $result['require-dev'] = $this->buildMap($packagesDev, $depsDev);
+        foreach ($packagesDev as $devPackageName) {
+            if(isset($result['require'][$devPackageName])) {
+                $result['require-dev'][$devPackageName] = $result['require'][$devPackageName];
+                unset($result['require'][$devPackageName]);
+            }
         }
 
         return $result;
