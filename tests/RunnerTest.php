@@ -40,4 +40,17 @@ class RunnerTest extends TestCase
         $this->assertFileExists($outPath);
         $this->assertJsonFileEqualsJsonFile($outPath, $expectedPath);
     }
+
+    public function testRecoverByInstalledJsonWithPackages()
+    {
+        $projectPath = __DIR__ . '/stub/app3';
+        $outPath = __DIR__ . '/_output/app3.json';
+        $expectedPath = __DIR__ . '/stub/app3_expected.json';
+        $this->assertFileNotExists($outPath);
+        $runner = new Runner($projectPath, $outPath);
+        $code = $runner->run();
+        $this->assertEquals(0, $code);
+        $this->assertFileExists($outPath);
+        $this->assertJsonFileEqualsJsonFile($outPath, $expectedPath);
+    }
 }
