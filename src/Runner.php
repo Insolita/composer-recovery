@@ -76,11 +76,20 @@ final class Runner
         if (empty($data)) {
             return [];
         }
-        $result = ['require' => []];
-        $deps = array_reduce($data, [$this, 'collectRequirements'], []);
-        $result['require'] = $this->buildMap($data, $deps);
-        return $result;
+        $packages = $data['packages'] ?? $data;
+        $packagesDev = $data['dev-package-names'] ?? [];
 
+        $deps = array_reduce($packages, [$this, 'collectRequirements'], []);
+        $result['require'] = $this->buildMap($packages, $deps);
+
+        foreach ($packagesDev as $devPackageName) {
+            if(isset($result['require'][$devPackageName])) {
+                $result['require-dev'][$devPackageName] = $result['require'][$devPackageName];
+                unset($result['require'][$devPackageName]);
+            }
+        }
+
+        return $result;
     }
 
     private function resolveByComposerLock(string $lockPath):array
@@ -91,7 +100,6 @@ final class Runner
         }
         $packages = $data['packages'] ?? [];
         $packagesDev = $data['packages-dev'] ?? [];
-        $result = ['require' => [], 'require-dev' => []];
 
         $deps = array_reduce($packages, [$this, 'collectRequirements'], []);
         $depsDev = array_reduce($packagesDev, [$this, 'collectRequirements'], []);

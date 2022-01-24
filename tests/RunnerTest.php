@@ -8,7 +8,7 @@ class RunnerTest extends TestCase
     public function setUp():void
     {
         parent::setUp();
-        foreach (['app1.json', 'app2.json'] as $file) {
+        foreach (['app1.json', 'app2.json', 'app3.json'] as $file) {
             if (file_exists(__DIR__ . '/_output/' . $file)) {
                 unlink(__DIR__ . '/_output/' . $file);
             }
@@ -33,6 +33,19 @@ class RunnerTest extends TestCase
         $projectPath = __DIR__ . '/stub/app2';
         $outPath = __DIR__ . '/_output/app2.json';
         $expectedPath = __DIR__ . '/stub/app2_expected.json';
+        $this->assertFileNotExists($outPath);
+        $runner = new Runner($projectPath, $outPath);
+        $code = $runner->run();
+        $this->assertEquals(0, $code);
+        $this->assertFileExists($outPath);
+        $this->assertJsonFileEqualsJsonFile($outPath, $expectedPath);
+    }
+
+    public function testRecoverByInstalledJsonWithPackages()
+    {
+        $projectPath = __DIR__ . '/stub/app3';
+        $outPath = __DIR__ . '/_output/app3.json';
+        $expectedPath = __DIR__ . '/stub/app3_expected.json';
         $this->assertFileNotExists($outPath);
         $runner = new Runner($projectPath, $outPath);
         $code = $runner->run();
